@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'juansebastianlopez395@gmail.com' && isEmailVerified()
+        || exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Client Validation
+    function isValidClient(data) {
+      return data.keys().hasAll(['name', 'plan', 'email', 'createdAt'])
+        && data.keys().size() <= 12 // Optional fields included
+        && data.name is string && data.name.size() <= 100
+        && data.plan in ['Plan Básico', 'Plan Profesional', 'Plan Elite']
+        && data.email is string && data.email.size() <= 100
+        && data.createdAt is timestamp;
+    }
+
+    match /clients/{clientId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.email == request.auth.token.email);
+      allow create: if isAdmin() && isValidClient(request.resource.data) && isValidId(clientId);
+      allow update: if isAdmin() && isValidClient(request.resource.data) 
+                    && request.resource.data.createdAt == resource.data.createdAt; // Immutable createdAt
+      allow delete: if isAdmin();
+    }
+
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if false; // Only manageable via console or specialized tool
+    }
+  }
+}

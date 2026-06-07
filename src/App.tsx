@@ -107,6 +107,10 @@ export default function App() {
     {
       q: "¿Cómo se calculan las comisiones de los barberos?",
       a: "El sistema automatiza todo el proceso financiero de la barbería. Cada vez que se completa una cita, el sistema calcula la comisión exacta del barbero de forma automática basándose en las tarifas de los servicios y el porcentaje de comisión que definas para cada uno. Olvídate de llevar cuentas en papel al final de la semana."
+    },
+    {
+      q: "¿Tienen servicio de migración si actualmente uso otro programa u hojas de cálculo?",
+      a: "¡Sí, al 100%! Sabemos que cambiar de software da pereza o temor a perder información valiosa de tus clientes. Ofrecemos un servicio de migración gratuito donde nuestro equipo se encarga de transferir toda tu base de datos (clientes, catálogo de servicios, inventario e historial de citas) a Cut-One en menos de 24 horas, sin detener tu operación y garantizando una transición impecable."
     }
   ];
 
@@ -755,6 +759,137 @@ export default function App() {
 
             </div>
 
+          </div>
+        </section>
+
+        {/* --- SECTION 6B: MIGRATION SPECIAL OFFER --- */}
+        <section id="migracion" className="py-16 px-4 sm:px-6 max-w-5xl mx-auto space-y-12 border-t border-white/[0.04]">
+          <div className="bg-gradient-to-br from-[#0c0c0d] to-[#040405] border border-emerald-500/25 rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+            {/* Background glowing ambient radial gradient */}
+            <div className="absolute -top-12 -right-12 w-80 h-80 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-80 h-80 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
+
+            <div className="grid md:grid-cols-12 gap-8 items-center relative z-10">
+              
+              {/* Left Column: Visual presentation of benefits */}
+              <div className="md:col-span-7 space-y-6">
+                <div className="space-y-2">
+                  <span className="text-[9px] bg-emerald-500/10 text-emerald-400 uppercase font-black px-3 py-1 rounded-full border border-emerald-500/25 tracking-widest inline-block select-none">
+                    🔑 MIGRACIÓN 100% GRATUITA Y VIP
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white leading-tight">
+                    ¿Usas otra plataforma o Excel? <br />
+                    <span className="text-emerald-400">Te mudamos sin costo</span> y sin complicaciones
+                  </h2>
+                  <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed max-w-xl">
+                    Sabemos que cambiar de herramienta de gestión puede traer inquietud por la seguridad de tus clientes e historial de ventas. Por eso, nuestro equipo de soporte VIP se encarga de transferir de forma íntegra toda tu información en <span className="text-white font-extrabold">menos de 24 horas</span>. ¡Impresiona a tus clientes con una experiencia de reserva premium desde el celular y eleva el nivel de tu marca!
+                  </p>
+                </div>
+
+                {/* Grid of migrating assets */}
+                <div className="grid grid-cols-2 gap-4 pt-2">
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                    <div className="text-emerald-400 bg-emerald-500/10 p-1.5 rounded-lg shrink-0">
+                      <Check size={13} />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-neutral-200">Lista de Clientes</h4>
+                      <p className="text-[10px] text-neutral-500">Contactos e información</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                    <div className="text-emerald-400 bg-emerald-500/10 p-1.5 rounded-lg shrink-0">
+                      <Check size={13} />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-neutral-200">Servicios y Catálogo</h4>
+                      <p className="text-[10px] text-neutral-500">Precios y duraciones</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                    <div className="text-emerald-400 bg-emerald-500/10 p-1.5 rounded-lg shrink-0">
+                      <Check size={13} />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-neutral-200">Historial Completo</h4>
+                      <p className="text-[10px] text-neutral-500">Citas y notas históricas</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                    <div className="text-emerald-400 bg-emerald-500/10 p-1.5 rounded-lg shrink-0">
+                      <Check size={13} />
+                    </div>
+                    <div>
+                      <h4 className="text-[11px] font-bold text-neutral-200">Barberos y Equipos</h4>
+                      <p className="text-[10px] text-neutral-500">Horarios y comisiones</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <p className="text-[10px] text-neutral-500 italic leading-relaxed">
+                    * Nos encargamos de todo el proceso sin interrumpir tus reservas vigentes ni la atención diaria.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column: Step by step action */}
+              <div className="md:col-span-5 bg-black/60 border border-white/5 rounded-2xl p-5 sm:p-6 space-y-5 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xs font-black uppercase tracking-wider text-neutral-200 border-b border-white/[0.04] pb-3 mb-4">
+                    Proceso de Mudanza Express
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    <div className="flex gap-3">
+                      <span className="text-[10px] font-black font-mono text-emerald-400 bg-emerald-500/10 w-5 h-5 rounded-full flex items-center justify-center shrink-0">
+                        1
+                      </span>
+                      <div>
+                        <h5 className="text-[11px] font-black text-neutral-200 uppercase">Activas tu plan</h5>
+                        <p className="text-[10px] text-neutral-400 mt-0.5">Eliges el plan de Cut-One idóneo para ti.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <span className="text-[10px] font-black font-mono text-emerald-400 bg-emerald-500/10 w-5 h-5 rounded-full flex items-center justify-center shrink-0">
+                        2
+                      </span>
+                      <div>
+                        <h5 className="text-[11px] font-black text-neutral-200 uppercase">Pides la migración</h5>
+                        <p className="text-[10px] text-neutral-400 mt-0.5">Nos compartes un reporte, Excel o acceso de tu sistema actual.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3">
+                      <span className="text-[10px] font-black font-mono text-emerald-400 bg-emerald-500/10 w-5 h-5 rounded-full flex items-center justify-center shrink-0">
+                        3
+                      </span>
+                      <div>
+                        <h5 className="text-[11px] font-black text-neutral-200 uppercase">Nosotros lo pasamos</h5>
+                        <p className="text-[10px] text-neutral-400 mt-0.5">En menos de 24 horas importamos gratis tu información.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <a 
+                    href={`${whatsappUrl}?text=${encodeURIComponent("Hola Cut-One, uso otra plataforma en mi barbería y quiero solicitar el servicio gratuito de migración express de todos mis datos (clientes, historial, servicios) en menos de 24 horas.")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 px-4 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-widest text-[9px] rounded-xl shadow-lg shadow-emerald-500/10 active:scale-95 transition-all text-center flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle size={12} className="fill-black shrink-0" />
+                    <span>Migrar mi Barbería Gratis</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
 

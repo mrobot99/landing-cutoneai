@@ -6,6 +6,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import CutOneLogo from "./components/CutOneLogo";
+import pzBarbershopImg from "./assets/images/pz_barbershop_1780863657701.png";
+import cutOneLogoImg from "./assets/images/cut_one_logo_1780863673282.png";
+import pzBarberLogoImg from "./assets/images/pz_barber_logo_1780864942954.png";
 import { 
   Check, 
   Instagram, 
@@ -131,7 +134,10 @@ export default function App() {
       tag: "Recomendado",
       tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
       price: "99.900",
-      whatsappMsg: "Hola Cut-One, me interesa el Plan Estándar (99.900 COP/mes) para mi barbería.",
+      hasPromo: true,
+      promoPrice: "89.910",
+      promoText: "¡10% DE DESCUENTO EN LOS PRIMEROS 2 MESES!",
+      whatsappMsg: "Hola Cut-One, me interesa conocer más del Plan Estándar (99.900 COP/mes) con el 10% de descuento para mis primeros 2 meses.",
       description: "Todas las funcionalidades clave para impulsar tu barbería.",
       features: [
         { text: "Todas las funcionalidades del sistema", included: true },
@@ -191,7 +197,7 @@ export default function App() {
       {/* Open Graph Meta Tags (Optimized for WhatsApp, Messenger, Instagram, and Facebook) */}
       <meta property="og:title" content="Cut-One | Agenda tu Barbería en Colombia" />
       <meta property="og:description" content="Automatiza tu barbería hoy. Enlace personalizado en el que tus clientes reservan de forma autónoma en 20 segundos y tú calculas comisiones sin esfuerzo." />
-      <meta property="og:image" content="https://ais-pre-hnzzplcllf5ihj7dlslanf-273751191439.us-east1.run.app/input_file_0.png" />
+      <meta property="og:image" content={pzBarbershopImg} />
       <meta property="og:url" content="https://ais-pre-hnzzplcllf5ihj7dlslanf-273751191439.us-east1.run.app" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Cut-One" />
@@ -201,7 +207,7 @@ export default function App() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="Cut-One | Agenda tu Barbería en Colombia" />
       <meta name="twitter:description" content="Todas las funcionalidades clave para tu barbería: reservas en 20 segundos, control de barberos, comisiones y soporte prioritario 24/7." />
-      <meta name="twitter:image" content="https://ais-pre-hnzzplcllf5ihj7dlslanf-273751191439.us-east1.run.app/input_file_0.png" />
+      <meta name="twitter:image" content={pzBarbershopImg} />
       
       {/* Dynamic Animated Top Banner (Cintillo de Soporte y Facilidad) */}
       <div className="relative bg-[#080808] border-b border-white/[0.04] py-2 px-4 overflow-hidden select-none z-55">
@@ -458,21 +464,18 @@ export default function App() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 blur-[80px] rounded-full pointer-events-none" />
             
             <div className="grid md:grid-cols-12 gap-8 items-stretch">
-              {/* Image Container with high quality presentation */}
-              <div className="md:col-span-5 relative group flex flex-col">
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-3xl blur opacity-30 group-hover:opacity-55 transition duration-500" />
-                <div className="relative bg-black rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex-1 flex flex-col">
-                  {/* Aspect-4/5 gives more portrait breathing room vertically for the team photo */}
+              {/* Image Container with high quality logo presentation */}
+              <div className="md:col-span-5 relative group flex flex-col justify-center items-center">
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-blue-500 via-neutral-800 to-emerald-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+                <div className="relative bg-black rounded-2xl p-6 overflow-hidden border border-white/10 shadow-2xl flex-1 flex flex-col justify-center items-center w-full min-h-[250px]">
                   <img 
-                    src="/input_file_0.png" 
-                    alt="PZ Barbershop" 
+                    src={pzBarberLogoImg} 
+                    alt="PZ Barbershop Logo" 
                     referrerPolicy="no-referrer"
-                    className="w-full h-full aspect-[4/5] object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" 
+                    className="w-[80%] max-w-[220px] md:max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.03] contrast-[3.5] brightness-[1.1] grayscale" 
                   />
-                  {/* Subtle lower gradient overlay so the team photo is fully bright and visible */}
-                  <div className="absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-t from-black/75 to-transparent pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 z-10">
-                    <span className="text-[10px] bg-blue-600 text-white font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-md">
+                  <div className="absolute bottom-3 right-3 z-10">
+                    <span className="text-[9px] bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 font-black uppercase tracking-widest px-2.5 py-1 rounded-md shadow-md bg-black/90">
                       Cliente Oficial
                     </span>
                   </div>
@@ -540,14 +543,29 @@ export default function App() {
 
             {/* Simulated selected plan display */}
             <div className="bg-[#0b0b0b] border border-neutral-800 rounded-3xl p-5 space-y-5 relative overflow-hidden">
+              {PLANS_DATA[activePlanIdx].hasPromo && (
+                <div className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 p-3 rounded-xl text-[10px] font-black text-center select-none tracking-wide animate-pulse">
+                  🎁 ¡Este plan cuenta con {PLANS_DATA[activePlanIdx].promoText}!
+                </div>
+              )}
               <div className="flex items-center justify-between">
                 <span className={`text-[9px] font-black uppercase px-2.5 py-0.5 rounded border ${PLANS_DATA[activePlanIdx].tagColor}`}>
                   {PLANS_DATA[activePlanIdx].tag}
                 </span>
-                <div className="flex items-baseline gap-0.5">
-                  <span className="text-2xl font-black text-white">${PLANS_DATA[activePlanIdx].price}</span>
-                  <span className="text-[10px] text-neutral-500">/ mes</span>
-                </div>
+                {PLANS_DATA[activePlanIdx].hasPromo && PLANS_DATA[activePlanIdx].promoPrice ? (
+                  <div className="flex flex-col items-end">
+                    <span className="text-[11px] text-neutral-500 line-through font-mono">${PLANS_DATA[activePlanIdx].price}</span>
+                    <div className="flex items-baseline gap-0.5 font-mono">
+                      <span className="text-2xl font-black text-emerald-400">${PLANS_DATA[activePlanIdx].promoPrice}</span>
+                      <span className="text-[10px] text-emerald-400/80 font-medium whitespace-nowrap">/ mes *</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-baseline gap-0.5">
+                    <span className="text-2xl font-black text-white">${PLANS_DATA[activePlanIdx].price}</span>
+                    <span className="text-[10px] text-neutral-500">/ mes</span>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -592,9 +610,11 @@ export default function App() {
             {PLANS_DATA.map((plan, idx) => (
               <div 
                 key={plan.name}
-                className={`bg-[#0b0b0b] border rounded-3xl p-5 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300 ${
+                className={`bg-[#0b0b0b] border rounded-3xl p-5 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300 relative ${
                   plan.name.includes("Pro") 
-                    ? "border-amber-500/30 shadow-2xl shadow-amber-500/5 relative"
+                    ? "border-amber-500/30 shadow-2xl shadow-amber-500/5"
+                    : plan.hasPromo
+                    ? "border-emerald-500/25 shadow-2xl shadow-emerald-500/5 rgb-glow"
                     : "border-white/[0.04] shadow-md"
                 }`}
               >
@@ -603,22 +623,43 @@ export default function App() {
                     RECOMENDADO
                   </div>
                 )}
+                {plan.hasPromo && (
+                  <div className="absolute top-[-9px] right-4 bg-emerald-500 text-black text-[8px] font-black uppercase px-2.5 py-0.5 rounded-full select-none tracking-widest animate-pulse">
+                    10% Descuento
+                  </div>
+                )}
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
+                   <div className="flex items-center justify-between">
                     <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded border ${plan.tagColor}`}>
                       {plan.tag}
                     </span>
-                    <div className="flex items-baseline gap-0.5 font-mono">
-                      <span className="text-xl lg:text-2xl font-black text-white">${plan.price}</span>
-                      <span className="text-[9px] text-neutral-500">/m</span>
-                    </div>
+                    {plan.hasPromo && plan.promoPrice ? (
+                      <div className="flex flex-col items-end">
+                        <span className="text-[10px] text-neutral-500 line-through font-mono">${plan.price}</span>
+                        <div className="flex items-baseline gap-0.5 font-mono">
+                          <span className="text-xl lg:text-2xl font-black text-emerald-400">${plan.promoPrice}</span>
+                          <span className="text-[9px] text-emerald-400/80">/m *</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-baseline gap-0.5 font-mono">
+                        <span className="text-xl lg:text-2xl font-black text-white">${plan.price}</span>
+                        <span className="text-[9px] text-neutral-500">/m</span>
+                      </div>
+                    )}
                   </div>
 
                   <div>
                     <h3 className="text-base font-black text-white uppercase">{plan.name}</h3>
                     <p className="text-[11px] text-neutral-400 mt-1 leading-normal">{plan.description}</p>
                   </div>
+
+                  {plan.hasPromo && (
+                    <div className="bg-emerald-500/10 text-emerald-400 text-[10px] font-bold leading-normal p-2.5 rounded-xl border border-emerald-500/20 text-center select-none">
+                      🎁 10% de descuento en los primeros dos meses.
+                    </div>
+                  )}
 
                   <div className="space-y-2.5 pt-3 border-t border-white/[0.04]">
                     {plan.features.map((feat, i) => (

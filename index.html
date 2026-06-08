@@ -12,13 +12,15 @@
     <meta name="robots" content="index, follow" />
     
     <!-- Global Icon & Favicon configurations for Search Engines -->
-    <link rel="icon" type="image/png" href="/src/assets/images/cut_one_logo_1780863673282.png" />
-    <link rel="apple-touch-icon" href="/src/assets/images/cut_one_logo_1780863673282.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     
     <!-- Open Graph / Facebook / WhatsApp Meta Tags -->
     <meta property="og:title" content="Cut-One | Agenda tu Barbería en Colombia" />
     <meta property="og:description" content="Automatiza tu barbería hoy. Enlace personalizado en el que tus clientes reservan de forma autónoma en 20 segundos y tú calculas comisiones sin esfuerzo." />
-    <meta property="og:image" content="/src/assets/images/cut_one_logo_1780863673282.png" />
+    <meta property="og:image" content="https://www.cutoneai.com/logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Cut-One" />
     <meta property="og:locale" content="es_CO" />
@@ -27,7 +29,40 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Cut-One | Agenda tu Barbería en Colombia" />
     <meta name="twitter:description" content="Todas las funcionalidades clave para tu barbería: reservas en 20 segundos, control de barberos, comisiones y soporte prioritario 24/7." />
-    <meta name="twitter:image" content="/src/assets/images/cut_one_logo_1780863673282.png" />
+    <meta name="twitter:image" content="https://www.cutoneai.com/logo.png" />
+
+    <!-- Google Structured Data (JSON-LD) for SEO Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Cut-One",
+      "operatingSystem": "All",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "99900",
+        "priceCurrency": "COP",
+        "description": "Plan Estándar (10% descuento en los primeros 2 meses)",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "99900",
+          "priceCurrency": "COP",
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": "1",
+            "unitCode": "MON"
+          }
+        }
+      },
+      "description": "El software de reservas y control de comisiones de barberías más rápido y premium de Colombia.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "128"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

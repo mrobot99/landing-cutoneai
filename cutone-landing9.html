@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cut-One — El sistema de gestión para barberías más completo de Colombia y LATAM. Agenda online, caja, nómina y One AI. 30 días gratis.">
+<title>Cut-One · Gestión para barberías</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & TOKENS ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:    #000000;
+  --bg1:   #0a0a0a;
+  --bg2:   #111111;
+  --card:  #0d0d0d;
+  --card2: #161616;
+  --b0: rgba(255,255,255,0.04);
+  --b1: rgba(255,255,255,0.08);
+  --b2: rgba(255,255,255,0.14);
+  --b3: rgba(255,255,255,0.26);
+  --white: #ffffff;
+  --off:   #86868b;
+  --muted: #3a3a3c;
+  --gold:  #c8a96d;
+  --gold2: #e6c98e;
+  --gold3: rgba(200,169,109,0.10);
+  --gold4: rgba(200,169,109,0.20);
+  --green: #30d158;
+  --red:   #ff453a;
+  --f:  -apple-system, 'SF Pro Display', 'SF Pro Text', Inter, sans-serif;
+  --ft: -apple-system, 'SF Pro Text', Inter, sans-serif;
+  --r: 18px;
+  --r-sm: 12px;
+  --r-pill: 980px;
+}
+html { background: var(--bg); scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--ft);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+img, svg { display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 4px; }
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 52px;
+  background: rgba(0,0,0,0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 0.5px solid rgba(255,255,255,0.10);
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; }
+.nav-logo-hex { width: 24px; height: 24px; flex-shrink: 0; }
+.nav-logo-name { font-family: var(--f); font-size: 17px; font-weight: 600; letter-spacing: -0.5px; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { font-size: 13px; font-weight: 400; color: var(--off); letter-spacing: -0.2px; transition: color 0.15s; cursor: pointer; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-family: var(--ft); font-size: 13px; font-weight: 400;
+  padding: 7px 17px; border-radius: var(--r-pill);
+  background: var(--white); color: #000; border: none;
+  letter-spacing: -0.2px; cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: #e5e5ea; transform: scale(0.98); }
+.nav-cta:active { transform: scale(0.95); }
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .nav-logo-name { font-size: 16px; }
+}
+
+/* ─── BUTTONS ─── */
+.btn-w {
+  position: relative; overflow: hidden;
+  font-family: var(--ft); font-size: 16px; font-weight: 400;
+  padding: 14px 28px; border-radius: var(--r-pill);
+  background: var(--white); color: #000; border: none; cursor: pointer;
+  letter-spacing: -0.3px; display: inline-block;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), background 0.15s;
+}
+.btn-w:hover { background: #e5e5ea; transform: scale(1.03); }
+.btn-w:active { transform: scale(0.97); }
+
+.btn-g {
+  font-family: var(--ft); font-size: 16px; font-weight: 400;
+  padding: 14px 28px; border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.08); color: var(--white);
+  border: none; cursor: pointer; letter-spacing: -0.3px; display: inline-block;
+  transition: background 0.15s, transform 0.15s;
+}
+.btn-g:hover { background: rgba(255,255,255,0.13); transform: scale(1.02); }
+.btn-g:active { transform: scale(0.97); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 88vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 64px; text-align: center;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; font-weight: 400; letter-spacing: 0.01em;
+  padding: 6px 14px; border-radius: var(--r-pill);
+  border: 0.5px solid rgba(200,169,109,0.32);
+  color: var(--gold); background: var(--gold3); margin-bottom: 28px;
+}
+.pill-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+  animation: pulse 2.4s ease-in-out infinite; flex-shrink: 0;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+h1.hero-title {
+  font-family: var(--f);
+  font-size: clamp(38px, 9vw, 80px);
+  font-weight: 700; line-height: 1.04; letter-spacing: -2.5px;
+  max-width: 820px; margin-bottom: 18px;
+}
+h1.hero-title em { font-style: normal; color: var(--gold); }
+
+.hero-sub {
+  font-size: clamp(16px, 4vw, 19px); font-weight: 300;
+  color: var(--off); max-width: 460px; line-height: 1.55;
+  margin-bottom: 36px; letter-spacing: -0.3px;
+}
+.hero-actions { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
+
+.oferta-pill {
+  margin-top: 18px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 400; letter-spacing: -0.1px;
+  padding: 6px 14px; border-radius: var(--r-pill);
+  border: 0.5px solid rgba(200,169,109,0.22);
+  color: var(--gold); background: var(--gold3);
+}
+
+.hero-foot { margin-top: 48px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.avstack { display: flex; }
+.av {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--card2); border: 2px solid var(--bg);
+  margin-left: -8px; display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 500; color: var(--off);
+}
+.av:first-child { margin-left: 0; }
+.hero-foot-txt { font-size: 13px; font-weight: 300; color: var(--off); letter-spacing: -0.2px; }
+.hero-foot-txt strong { color: var(--white); font-weight: 400; }
+
+/* ─── DIVIDER ─── */
+.divline { height: 0.5px; background: rgba(255,255,255,0.08); }
+
+/* ─── SECTION WRAPPER ─── */
+.sec {
+  padding: 72px 24px;
+  max-width: 1100px; margin: 0 auto;
+}
+@media (min-width: 768px) { .sec { padding: 88px 44px; } }
+
+.sec-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+}
+.sec-title {
+  font-family: var(--f);
+  font-size: clamp(26px, 5vw, 48px);
+  font-weight: 700; letter-spacing: -1.6px; line-height: 1.06;
+  margin-bottom: 12px;
+}
+.sec-sub {
+  font-size: clamp(15px, 3.5vw, 17px); font-weight: 300;
+  color: var(--off); line-height: 1.55; max-width: 480px;
+  margin-bottom: 40px; letter-spacing: -0.3px;
+}
+
+/* ─── FEAT GRID ─── */
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px; background: var(--b0);
+  border-radius: var(--r); overflow: hidden;
+}
+@media (min-width: 600px) { .feat-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 900px) { .feat-grid { grid-template-columns: repeat(3,1fr); } }
+
+.feat-card {
+  position: relative; overflow: hidden;
+  background: var(--bg1); padding: 26px 22px;
+  transition: background 0.22s;
+}
+.feat-card::before {
+  content: ''; position: absolute;
+  top: -60px; left: -60px; width: 140px; height: 140px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,109,0.09) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none;
+}
+.feat-card:hover { background: #0e0e0e; }
+.feat-card:hover::before { opacity: 1; transform: translate(16px,16px); }
+.feat-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--card2); border: 0.5px solid var(--b1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; margin-bottom: 14px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.feat-card:hover .feat-icon { border-color: rgba(200,169,109,0.28); transform: scale(1.07); }
+.feat-card h3 {
+  font-family: var(--f); font-size: 15px; font-weight: 600;
+  letter-spacing: -0.4px; margin-bottom: 6px; transition: color 0.2s;
+}
+.feat-card:hover h3 { color: var(--gold2); }
+.feat-card p { font-size: 13px; font-weight: 300; color: var(--off); line-height: 1.5; letter-spacing: -0.1px; }
+
+/* ─── PLANS ─── */
+.plans-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 640px) { .plans-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1000px) { .plans-grid { grid-template-columns: repeat(4,1fr); } }
+
+.plan-card {
+  position: relative; overflow: hidden;
+  background: var(--bg1); border: 0.5px solid var(--b1);
+  border-radius: var(--r); padding: 24px 20px;
+  display: flex; flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s cubic-bezier(.34,1.3,.64,1);
+}
+.plan-card::after {
+  content: ''; position: absolute; inset: 0; border-radius: var(--r);
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,169,109,0.055) 0%, transparent 65%);
+  opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.plan-card:hover { border-color: var(--b2); transform: translateY(-4px); }
+.plan-card:hover::after { opacity: 1; }
+.plan-card.featured { border: 0.5px solid rgba(200,169,109,0.48); background: #0b0903; }
+.plan-card.featured::after { opacity: 0.7; }
+.plan-card.featured:hover { border-color: rgba(200,169,109,0.78); transform: translateY(-5px); }
+
+.plan-badge {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--gold); background: var(--gold3);
+  border: 0.5px solid rgba(200,169,109,0.22); border-radius: var(--r-pill);
+  padding: 3px 10px; display: inline-block; margin-bottom: 12px; align-self: flex-start;
+}
+.oferta-tag {
+  display: inline-block; margin-bottom: 10px; align-self: flex-start;
+  font-size: 10px; font-weight: 400; letter-spacing: 0.02em;
+  padding: 3px 9px; border-radius: var(--r-pill);
+  background: rgba(255,69,58,0.1); color: var(--red);
+  border: 0.5px solid rgba(255,69,58,0.22);
+}
+.plan-name { font-family: var(--f); font-size: 18px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 5px; }
+.plan-desc { font-size: 12px; font-weight: 300; color: var(--off); line-height: 1.5; letter-spacing: -0.1px; margin-bottom: 16px; }
+
+/* precio animado */
+.price-old-wrap { display: inline-block; margin-bottom: 3px; }
+.price-old {
+  font-family: var(--f); font-size: 15px; font-weight: 400;
+  color: var(--muted); letter-spacing: -0.3px; position: relative; display: inline-block;
+}
+.price-old::after {
+  content: ''; position: absolute;
+  left: -3px; right: -3px; top: 50%; height: 1.5px;
+  background: rgba(200,169,109,0.75);
+  transform: scaleX(0); transform-origin: left;
+  animation: strikeLoop 3.2s ease-in-out infinite;
+}
+@keyframes strikeLoop {
+  0%   { transform: scaleX(0); transform-origin: left;  opacity: 1; }
+  38%  { transform: scaleX(1); transform-origin: left;  opacity: 1; }
+  55%  { transform: scaleX(1); transform-origin: left;  opacity: 1; }
+  70%  { transform: scaleX(0); transform-origin: right; opacity: 0.3; }
+  86%  { transform: scaleX(0); transform-origin: left;  opacity: 0; }
+  100% { transform: scaleX(0); transform-origin: left;  opacity: 1; }
+}
+.price-new { display: flex; align-items: baseline; gap: 3px; margin-bottom: 4px; }
+.price-amt { font-family: var(--f); font-size: 30px; font-weight: 700; letter-spacing: -1.5px; color: var(--gold2); }
+.price-per { font-size: 12px; font-weight: 300; color: var(--off); }
+.price-note { font-size: 11px; font-weight: 300; color: var(--off); margin-bottom: 18px; }
+
+.plan-divider { border: none; border-top: 0.5px solid var(--b0); margin-bottom: 14px; }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+.plan-features li {
+  font-size: 12.5px; font-weight: 300; color: var(--off);
+  display: flex; gap: 8px; line-height: 1.4; letter-spacing: -0.1px;
+}
+.plan-features li::before { content: '✓'; color: var(--gold); font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+.plan-features li.dim { color: var(--muted); }
+.plan-features li.dim::before { content: '—'; color: var(--muted); font-weight: 300; }
+
+.plan-btn {
+  position: relative; overflow: hidden;
+  margin-top: 22px; padding: 12px 0; border-radius: var(--r-pill);
+  font-family: var(--ft); font-size: 14px; font-weight: 400; letter-spacing: -0.2px;
+  border: 0.5px solid var(--b2); background: transparent; color: var(--white);
+  cursor: pointer; text-align: center; width: 100%;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s cubic-bezier(.34,1.56,.64,1);
+}
+.plan-btn:hover { background: rgba(255,255,255,0.07); border-color: var(--b3); transform: scale(1.02); }
+.plan-btn:active { transform: scale(0.97); }
+.plan-btn.featured-btn {
+  background: var(--gold); color: #000; border-color: transparent; font-weight: 500;
+  box-shadow: 0 4px 22px rgba(200,169,109,0.22);
+}
+.plan-btn.featured-btn:hover { background: var(--gold2); box-shadow: 0 8px 36px rgba(200,169,109,0.32); transform: scale(1.03); }
+
+/* ─── EXTENSIONS ─── */
+.ext-grid {
+  display: grid; grid-template-columns: 1fr; gap: 10px;
+}
+@media (min-width: 600px) { .ext-grid { grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 900px) { .ext-grid { grid-template-columns: repeat(4,1fr); } }
+
+.ext-card {
+  position: relative; overflow: hidden;
+  background: var(--bg1); border: 0.5px solid var(--b1);
+  border-radius: var(--r); padding: 22px 20px;
+  transition: border-color 0.22s, transform 0.22s cubic-bezier(.34,1.3,.64,1);
+}
+.ext-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1.5px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  transform: scaleX(0); transition: transform 0.3s cubic-bezier(.34,1.3,.64,1);
+  transform-origin: center;
+}
+.ext-card:hover { border-color: rgba(200,169,109,0.28); transform: translateY(-3px); }
+.ext-card:hover::after { transform: scaleX(1); }
+.ext-icon { font-size: 22px; margin-bottom: 12px; display: inline-block; transition: transform 0.25s cubic-bezier(.34,1.56,.64,1); }
+.ext-card:hover .ext-icon { transform: scale(1.18) rotate(-4deg); }
+.ext-card h3 { font-family: var(--f); font-size: 14px; font-weight: 600; letter-spacing: -0.4px; margin-bottom: 6px; }
+.ext-card p { font-size: 12px; font-weight: 300; color: var(--off); line-height: 1.55; letter-spacing: -0.1px; }
+.ext-tag {
+  display: inline-block; margin-top: 12px; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.03em; padding: 3px 9px; border-radius: var(--r-pill);
+}
+.ext-tag.on  { background: rgba(48,209,88,0.1);  color: var(--green); border: 0.5px solid rgba(48,209,88,0.2); }
+.ext-tag.soon{ background: var(--gold3);           color: var(--gold);  border: 0.5px solid rgba(200,169,109,0.2); }
+
+/* ─── ONE AI ─── */
+.ai-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px; align-items: center;
+  padding: 72px 24px; max-width: 1100px; margin: 0 auto;
+}
+@media (min-width: 768px) { .ai-wrap { grid-template-columns: 1fr 1fr; padding: 88px 44px; gap: 52px; } }
+
+.ai-chat {
+  background: var(--bg1); border: 0.5px solid var(--b1);
+  border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.ai-header { display: flex; align-items: center; gap: 8px; padding-bottom: 13px; border-bottom: 0.5px solid var(--b0); }
+.ai-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2.5s ease-in-out infinite; flex-shrink: 0; }
+.ai-header-name { font-family: var(--f); font-size: 13px; font-weight: 600; letter-spacing: -0.3px; }
+.ai-header-sub { font-size: 11px; font-weight: 300; color: var(--muted); margin-left: auto; }
+.msg { display: flex; flex-direction: column; gap: 3px; }
+.msg-user { align-items: flex-end; }
+.bubble {
+  max-width: 84%; padding: 10px 13px;
+  font-size: 13px; font-weight: 300; line-height: 1.5; border-radius: 18px;
+  letter-spacing: -0.1px;
+}
+.msg-user .bubble { background: #1c1c1e; border: 0.5px solid var(--b1); color: var(--white); border-radius: 18px 18px 5px 18px; }
+.msg-ai .bubble { background: rgba(200,169,109,0.09); border: 0.5px solid rgba(200,169,109,0.16); color: #d4aa70; border-radius: 18px 18px 18px 5px; }
+.msg-ai .bubble strong { color: var(--gold2); font-weight: 500; }
+.msg-label { font-size: 10px; font-weight: 300; color: var(--muted); padding: 0 4px; }
+.ai-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; }
+.ai-metric {
+  background: #1c1c1e; border-radius: var(--r-sm); padding: 10px;
+  text-align: center; border: 0.5px solid var(--b0);
+  transition: border-color 0.18s, transform 0.18s;
+}
+.ai-metric:hover { border-color: rgba(200,169,109,0.22); transform: translateY(-2px); }
+.metric-val { font-family: var(--f); font-size: 16px; font-weight: 700; color: var(--gold); letter-spacing: -0.8px; }
+.metric-lbl { font-size: 10px; font-weight: 300; color: var(--off); margin-top: 2px; }
+
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+.check-list li { display: flex; gap: 10px; font-size: clamp(14px,3.5vw,16px); font-weight: 300; color: var(--off); letter-spacing: -0.2px; line-height: 1.4; }
+.check-list li span { color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+
+/* ─── CTA ─── */
+.cta-section {
+  padding: 88px 24px 100px; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cta-section h2 {
+  font-family: var(--f); font-size: clamp(30px, 7vw, 60px);
+  font-weight: 700; letter-spacing: -2.2px; line-height: 1.05;
+  max-width: 560px; margin-bottom: 16px;
+}
+.cta-section h2 em { font-style: normal; color: var(--gold); }
+.cta-section p {
+  font-size: clamp(15px,3.5vw,17px); font-weight: 300;
+  color: var(--off); max-width: 380px; line-height: 1.6;
+  margin-bottom: 36px; letter-spacing: -0.3px;
+}
+.cta-actions { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 24px 24px;
+  border-top: 0.5px solid var(--b1);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+@media (min-width: 768px) { footer { padding: 24px 44px; } }
+.footer-logo { display: flex; align-items: center; gap: 8px; }
+.footer-logo-name { font-family: var(--f); font-size: 13px; font-weight: 500; color: var(--off); letter-spacing: -0.2px; }
+footer small { font-size: 12px; font-weight: 300; color: var(--muted); }
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <svg class="nav-logo-hex" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="100,4 187,52 187,148 100,196 13,148 13,52" fill="#111" stroke="#f8f8f8" stroke-width="10"/>
+      <path d="M132 68a42 42 0 1 0 0 64" stroke="#f8f8f8" stroke-width="13" stroke-linecap="round" fill="none"/>
+      <circle cx="100" cy="100" r="7" fill="#f8f8f8"/>
+    </svg>
+    <span class="nav-logo-name">Cut-One</span>
+  </div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#funciones">Funciones</a>
+      <a href="#planes">Precios</a>
+      <a href="#extensiones">Extensiones</a>
+      <a href="#oneai">One AI</a>
+    </div>
+    <button class="nav-cta" onclick="window.open('https://wa.me/573114168811','_blank')">Comenzar gratis</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-pill"><span class="pill-dot"></span>Gestión para barberías · Colombia &amp; LATAM</div>
+  <h1 class="hero-title">El sistema que tu<br>barbería <em>merece.</em></h1>
+  <p class="hero-sub">Agenda online, caja, nómina y una IA que te dice cómo va tu negocio. Todo en un solo lugar.</p>
+  <div class="hero-actions">
+    <button class="btn-w" onclick="window.open('https://wa.me/573114168811','_blank')">30 días gratis →</button>
+  </div>
+  <div class="oferta-pill">🔥 Oferta por tiempo limitado — precio especial de lanzamiento</div>
+  <div class="hero-foot">
+    <div class="avstack">
+      <div class="av">PZ</div><div class="av">MR</div><div class="av">JC</div><div class="av">+</div>
+    </div>
+    <p class="hero-foot-txt"><strong>PZ Barbershop</strong> y más barberías ya confían en Cut-One</p>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- ── FUNCIONES ── -->
+<section id="funciones" class="sec">
+  <p class="sec-label">Por qué Cut-One</p>
+  <h2 class="sec-title">Todo lo que necesitas,<br>sin lo que no.</h2>
+  <p class="sec-sub">Diseñado exclusivamente para barberías. Cada función tiene sentido en tu día a día.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📅</div>
+      <h3>Agenda online 24/7</h3>
+      <p>Tus clientes reservan solos desde tu página. Sin WhatsApp, sin llamadas perdidas.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💬</div>
+      <h3>Recordatorios automáticos</h3>
+      <p>Confirmación, recordatorio y agradecimiento por correo. Menos no-shows sin esfuerzo.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💰</div>
+      <h3>Dashboard financiero</h3>
+      <p>Ingresos por servicio y barbero en tiempo real. Sin hojas de Excel.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">✂️</div>
+      <h3>Gestión de barberos</h3>
+      <p>Agenda individual, servicios propios y cálculo automático de comisiones.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎨</div>
+      <h3>Tu marca, tu sistema</h3>
+      <p>Plan Pro con tu logo y colores. Tus clientes ven tu barbería, no Cut-One.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📦</div>
+      <h3>Inventario de productos</h3>
+      <p>Control de stock en tiempo real. Sabe cuándo pedir antes de quedarte sin nada.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- ── PLANES ── -->
+<section id="planes" class="sec">
+  <p class="sec-label">Planes</p>
+  <h2 class="sec-title">El precio correcto<br>para cada barbería.</h2>
+  <p class="sec-sub">Oferta por tiempo limitado. Activa tu plan hoy antes de que suba el precio.</p>
+  <div class="plans-grid">
+
+    <!-- Independiente -->
+    <div class="plan-card">
+      <span class="oferta-tag">⏳ Oferta limitada</span>
+      <div class="plan-name">Independiente</div>
+      <div class="plan-desc">Para el barbero que trabaja solo y quiere digitalizar su agenda.</div>
+      <div class="price-old-wrap"><span class="price-old">$49.900</span></div>
+      <div class="price-new"><span class="price-amt">$34.900</span><span class="price-per">/mes</span></div>
+      <div class="price-note">30 días gratis incluidos</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Página de reservas con fotos</li>
+        <li>Reseñas y sobre nosotros</li>
+        <li>Dashboard financiero</li>
+        <li>Reportes de ingresos</li>
+        <li>Correos automáticos</li>
+        <li class="dim">Múltiples barberos</li>
+        <li class="dim">Comisiones</li>
+        <li class="dim">Caja y pagos</li>
+      </ul>
+      <button class="plan-btn" onclick="window.open('https://wa.me/573114168811','_blank')">Elegir este plan</button>
+    </div>
+
+    <!-- Grupal -->
+    <div class="plan-card featured">
+      <span class="plan-badge">Más popular</span>
+      <span class="oferta-tag">⏳ Oferta limitada</span>
+      <div class="plan-name">Grupal</div>
+      <div class="plan-desc">Para barberías con equipo. Hasta 4 barberos en un solo panel.</div>
+      <div class="price-old-wrap"><span class="price-old">$89.900</span></div>
+      <div class="price-new"><span class="price-amt">$62.900</span><span class="price-per">/mes</span></div>
+      <div class="price-note">30 días gratis incluidos</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Todo del plan Independiente</li>
+        <li>Hasta 4 barberos</li>
+        <li>Agenda por barbero</li>
+        <li>Cálculo de comisiones</li>
+        <li>Reportes por barbero</li>
+        <li>Gestión de turnos</li>
+        <li class="dim">Caja y pagos completos</li>
+      </ul>
+      <button class="plan-btn featured-btn" onclick="window.open('https://wa.me/573114168811','_blank')">Elegir este plan</button>
+    </div>
+
+    <!-- Pro -->
+    <div class="plan-card">
+      <span class="oferta-tag">⏳ Oferta limitada</span>
+      <div class="plan-name">Pro</div>
+      <div class="plan-desc">Control total y tu propio sistema con tu marca.</div>
+      <div class="price-old-wrap"><span class="price-old">$149.900</span></div>
+      <div class="price-new"><span class="price-amt">$104.900</span><span class="price-per">/mes</span></div>
+      <div class="price-note">30 días gratis incluidos</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Todo del plan Grupal</li>
+        <li>Hasta 10 barberos</li>
+        <li>Página 100% personalizable</li>
+        <li>Caja y pagos a barberos</li>
+        <li>Inventario de productos</li>
+        <li>Reportes avanzados PDF/Excel</li>
+        <li>Retención automática de clientes</li>
+      </ul>
+      <button class="plan-btn" onclick="window.open('https://wa.me/573114168811','_blank')">Elegir este plan</button>
+    </div>
+
+    <!-- Custom -->
+    <div class="plan-card">
+      <div class="plan-name">Custom</div>
+      <div class="plan-desc">Para cadenas y barberías con múltiples sedes.</div>
+      <div style="margin-bottom:4px;">
+        <div class="price-new" style="margin-top:6px"><span class="price-amt" style="font-size:22px;letter-spacing:-0.8px;color:var(--white)">A medida</span></div>
+      </div>
+      <div class="price-note" style="visibility:hidden">–</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Todo del plan Pro</li>
+        <li>Sedes ilimitadas</li>
+        <li>Dashboard multisede</li>
+        <li>Barberos ilimitados</li>
+        <li>Integraciones custom</li>
+        <li>Onboarding dedicado</li>
+        <li>SLA de soporte</li>
+      </ul>
+      <button class="plan-btn" onclick="window.open('https://wa.me/573114168811','_blank')">Hablar con el equipo</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- ── EXTENSIONES ── -->
+<section id="extensiones" class="sec">
+  <p class="sec-label">Extensiones</p>
+  <h2 class="sec-title">Suma lo que necesitas<br>a tu plan.</h2>
+  <p class="sec-sub">Activa solo lo que usas. Sin pagar por funciones que no necesitas.</p>
+  <div class="ext-grid">
+    <div class="ext-card">
+      <div class="ext-icon">💬</div>
+      <h3>Vinculación con WhatsApp</h3>
+      <p>Notificaciones de reservas al WhatsApp del barbero y cliente. API oficial de WhatsApp Business.</p>
+      <span class="ext-tag on">Disponible</span>
+    </div>
+    <div class="ext-card">
+      <div class="ext-icon">🧾</div>
+      <h3>Facturación electrónica</h3>
+      <p>Facturas válidas ante la DIAN desde la plataforma. Compatible con régimen simple y ordinario.</p>
+      <span class="ext-tag soon">Próximamente</span>
+    </div>
+    <div class="ext-card">
+      <div class="ext-icon">🤖</div>
+      <h3>One AI — Asesor financiero</h3>
+      <p>IA entrenada con los datos reales de tu barbería. Reportes automáticos y chat en tiempo real.</p>
+      <span class="ext-tag on">Disponible</span>
+    </div>
+    <div class="ext-card">
+      <div class="ext-icon">💳</div>
+      <h3>Pagos online</h3>
+      <p>Nequi, Daviplata y tarjetas al reservar. Reduce cancelaciones de último momento.</p>
+      <span class="ext-tag on">Disponible</span>
+    </div>
+  </div>
+</section>
+
+<div class="divline"></div>
+
+<!-- ── ONE AI ── -->
+<div id="oneai" class="ai-wrap">
+  <div>
+    <p class="sec-label">One AI</p>
+    <h2 class="sec-title" style="margin-bottom:12px">Tu negocio te<br>habla. Escúchalo.</h2>
+    <p style="font-size:clamp(15px,3.5vw,17px);font-weight:300;color:var(--off);line-height:1.55;margin-bottom:24px;letter-spacing:-0.3px">
+      One AI es una inteligencia entrenada con los datos reales de tu barbería. Sabe cuánto vendiste, qué días están lentos y qué servicios dejan más margen.
+    </p>
+    <ul class="check-list">
+      <li><span>✓</span>Reportes automáticos cada semana</li>
+      <li><span>✓</span>Alertas cuando bajan los ingresos</li>
+      <li><span>✓</span>Recomendaciones de precios y promociones</li>
+      <li><span>✓</span>Chat 24/7 con datos de tu barbería</li>
+    </ul>
+    <button class="btn-w" onclick="window.open('https://wa.me/573114168811','_blank')">Activar One AI</button>
+  </div>
+  <div class="ai-chat">
+    <div class="ai-header">
+      <div class="ai-dot"></div>
+      <span class="ai-header-name">One AI</span>
+      <span class="ai-header-sub">Datos en tiempo real</span>
+    </div>
+    <div class="msg msg-user">
+      <div class="bubble">¿Cómo voy esta semana vs la anterior?</div>
+      <div class="msg-label">Tú</div>
+    </div>
+    <div class="msg msg-ai">
+      <div class="bubble">Esta semana llevas <strong>$847.000</strong> — 18% más que la semana pasada. El martes fue tu mejor día con 12 servicios.</div>
+      <div class="msg-label">One AI</div>
+    </div>
+    <div class="ai-metrics">
+      <div class="ai-metric"><div class="metric-val">$847K</div><div class="metric-lbl">Esta semana</div></div>
+      <div class="ai-metric"><div class="metric-val">+18%</div><div class="metric-lbl">vs semana ant.</div></div>
+      <div class="ai-metric"><div class="metric-val">12</div><div class="metric-lbl">mejor día</div></div>
+    </div>
+    <div class="msg msg-user">
+      <div class="bubble">¿Qué servicio me deja más plata?</div>
+      <div class="msg-label">Tú</div>
+    </div>
+    <div class="msg msg-ai">
+      <div class="bubble">El corte + barba es tu servicio más rentable: 42% de ingresos con solo el 28% de citas. Ponlo como destacado en tu página.</div>
+      <div class="msg-label">One AI</div>
+    </div>
+  </div>
+</div>
+
+<div class="divline"></div>
+
+<!-- ── CTA FINAL ── -->
+<section class="cta-section">
+  <h2>Tu barbería merece<br>un sistema <em>de verdad.</em></h2>
+  <p>30 días completamente gratis. Sin tarjeta de crédito. Cancelas cuando quieras.</p>
+  <div class="cta-actions">
+    <button class="btn-w" onclick="window.open('https://wa.me/573114168811','_blank')">Activar 30 días gratis →</button>
+    <button class="btn-g" onclick="window.open('https://wa.me/573114168811','_blank')">Hablar con el equipo</button>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <svg width="20" height="20" viewBox="0 0 200 200" fill="none">
+      <polygon points="100,4 187,52 187,148 100,196 13,148 13,52" fill="#111" stroke="#444" stroke-width="12"/>
+      <path d="M132 68a42 42 0 1 0 0 64" stroke="#666" stroke-width="13" stroke-linecap="round" fill="none"/>
+      <circle cx="100" cy="100" r="7" fill="#666"/>
+    </svg>
+    <span class="footer-logo-name">Cut-One</span>
+  </div>
+  <small>© 2025 Cut-One · Elysium Labs · Colombia</small>
+</footer>
+
+</body>
+</html>
